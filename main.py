@@ -5,9 +5,13 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
+# Set up a clock to manage frame rate
+clock = pygame.time.Clock()
+
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 player = pygame.Rect((350, 250, 50, 50))
+speed = 600  # pixels per second
 
 color_1 = (255, 0, 0)
 color_2 = (0, 255, 0)
@@ -19,22 +23,25 @@ player_color = color_1
 run = True
 while run:
 
+    # Calculate delta time
+    dt = clock.tick(60) / 1000  # Convert milliseconds to seconds
+
     screen.fill((0, 0, 0))
 
     pygame.draw.rect(screen, player_color, player)
 
     key = pygame.key.get_pressed()
     if key[pygame.K_a]:
-        player.move_ip(-1, 0)
+        player.move_ip(-speed * dt, 0)
         player_color = color_1
     elif key[pygame.K_d]:
-        player.move_ip(1, 0)
+        player.move_ip(speed * dt, 0)
         player_color = color_2
     elif key[pygame.K_w]:
-        player.move_ip(0, -1)
+        player.move_ip(0, -speed * dt)
         player_color = color_3
     elif key[pygame.K_s]:
-        player.move_ip(0, 1)
+        player.move_ip(0, speed * dt)
         player_color = color_4
 
     for event in pygame.event.get():
