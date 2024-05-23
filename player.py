@@ -8,12 +8,14 @@ from config import (
     COLOR_3,
     COLOR_4,
 )
+from bullet import Bullet
 
 
 class Player:
     def __init__(self, x, y, width, height):
         self.rect = pygame.Rect(x, y, width, height)
         self.color = COLOR_1
+        self.bullets = []
 
     def move(self, dt, keys):
         if keys[pygame.K_a]:
@@ -41,5 +43,18 @@ class Player:
         if self.rect.bottom > SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
 
+    def shoot(self):
+        bullet = Bullet(self.rect.centerx, self.rect.top)
+        self.bullets.append(bullet)
+
+    def update_bullets(self, dt):
+        for bullet in self.bullets:
+            bullet.move(dt)
+        self.bullets = [
+            bullet for bullet in self.bullets if not bullet.is_off_screen(SCREEN_HEIGHT)
+        ]
+
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
+        for bullet in self.bullets:
+            bullet.draw(screen)

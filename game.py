@@ -18,9 +18,12 @@ def run_game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                player.shoot()
 
         keys = pygame.key.get_pressed()
         player.move(dt, keys)
+        player.update_bullets(dt)
 
         screen.fill((0, 0, 0))
         player.draw(screen)
