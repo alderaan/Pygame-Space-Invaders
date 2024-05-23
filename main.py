@@ -44,6 +44,16 @@ while run:
         player.move_ip(0, speed * dt)
         player_color = color_4
 
+    # Ensure the player stays within screen boundaries
+    if player.left < 0:
+        player.left = 0
+    if player.right > SCREEN_WIDTH:
+        player.right = SCREEN_WIDTH
+    if player.top < 0:
+        player.top = 0
+    if player.bottom > SCREEN_HEIGHT:
+        player.bottom = SCREEN_HEIGHT
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False

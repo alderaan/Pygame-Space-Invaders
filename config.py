@@ -1,0 +1,9 @@
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+
+COLOR_1 = (255, 0, 0)
+COLOR_2 = (0, 255, 0)
+COLOR_3 = (0, 0, 255)
+COLOR_4 = (255, 255, 255)
+
+SPEED = 600  # pixels per second
