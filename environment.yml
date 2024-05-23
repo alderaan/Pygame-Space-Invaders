@@ -1,0 +1,8 @@
+name: pygame_1
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - pygame
