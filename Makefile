@@ -16,3 +16,6 @@ remove_env:
 
 run_example:
 	python3 -m pygame.examples.aliens
+
+run:
+	python main.py
