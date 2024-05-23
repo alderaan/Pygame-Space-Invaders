@@ -18,18 +18,10 @@ class Player:
         self.bullets = []
 
     def move(self, dt, keys):
-        if keys[pygame.K_a]:
+        if keys[pygame.K_LEFT]:
             self.rect.move_ip(-SPEED * dt, 0)
-            self.color = COLOR_1
-        elif keys[pygame.K_d]:
+        elif keys[pygame.K_RIGHT]:
             self.rect.move_ip(SPEED * dt, 0)
-            self.color = COLOR_2
-        elif keys[pygame.K_w]:
-            self.rect.move_ip(0, -SPEED * dt)
-            self.color = COLOR_3
-        elif keys[pygame.K_s]:
-            self.rect.move_ip(0, SPEED * dt)
-            self.color = COLOR_4
 
         self.check_bounds()
 

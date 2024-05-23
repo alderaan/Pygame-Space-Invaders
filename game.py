@@ -9,7 +9,7 @@ def run_game():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    player = Player(350, 250, 50, 50)
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT, 25, 25)
 
     run = True
     while run:
