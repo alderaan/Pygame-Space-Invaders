@@ -39,10 +39,8 @@ def run_game():
         # update enemies
         for enemy in enemies:
             enemy.update(dt)
-            # enemy.check_bullet_collisions(player)
 
         # Check if player's bullets hit enemies
-        # Create shallow copies of lists
         for bullet in player.bullets[:]:
             for enemy in enemies[:]:
                 if check_collision(bullet, enemy):
