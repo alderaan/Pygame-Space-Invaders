@@ -1,6 +1,7 @@
 import pygame
 from player import Player
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
+from enemy import Enemy
 
 
 def run_game():
@@ -10,6 +11,7 @@ def run_game():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT, 25, 25)
+    enemy = Enemy(SCREEN_WIDTH // 2, 50)
 
     run = True
     while run:
@@ -24,9 +26,11 @@ def run_game():
         keys = pygame.key.get_pressed()
         player.move(dt, keys)
         player.update_bullets(dt)
+        enemy.move()
 
         screen.fill((0, 0, 0))
         player.draw(screen)
+        enemy.draw(screen)
 
         pygame.display.update()
 
