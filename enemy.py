@@ -22,10 +22,8 @@ class Enemy:
 
     def move(self):
         self.x += self.direction * ENEMY_SPEED
-        if self.x > SCREEN_WIDTH:
-            self.x = -self.width
-        elif self.x < -self.width:
-            self.x = SCREEN_WIDTH
+        if self.x + self.width >= SCREEN_WIDTH or self.x <= 0:
+            self.direction *= -1  # Reverse direction
 
     def draw(self, screen):
         points = [
