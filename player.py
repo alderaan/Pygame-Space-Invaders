@@ -3,18 +3,17 @@ from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     SPEED,
-    COLOR_1,
-    COLOR_2,
-    COLOR_3,
-    COLOR_4,
+    PLAYER_COLOR,
+    PLAYER_WIDTH,
+    PLAYER_HEIGHT,
 )
 from bullet import Bullet
 
 
 class Player:
-    def __init__(self, x, y, width, height):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.color = COLOR_1
+    def __init__(self, x, y):
+        self.rect = pygame.Rect(x, y, PLAYER_WIDTH, PLAYER_HEIGHT)
+        self.color = PLAYER_COLOR
         self.bullets = []
 
     def move(self, dt, keys):

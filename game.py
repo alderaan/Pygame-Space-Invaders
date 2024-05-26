@@ -10,7 +10,7 @@ def run_game():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT, 25, 25)
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT)
     enemy = Enemy(SCREEN_WIDTH // 2, 50)
 
     run = True
