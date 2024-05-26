@@ -7,6 +7,7 @@ from config import (
     ENEMY_WIDTH,
     ENEMY_HEIGHT,
     ENEMY_BULLET_COLOR,
+    ENEMY_RELOAD_TIME,
 )
 from bullet import Bullet
 from collision import check_collision
@@ -35,7 +36,7 @@ class Enemy:
 
     def try_to_shoot(self):
         current_time = time.time()
-        if current_time - self.last_shot_time >= 1:
+        if current_time - self.last_shot_time >= ENEMY_RELOAD_TIME:
             self.shoot()
             self.last_shot_time = current_time  # Update last shot time
 

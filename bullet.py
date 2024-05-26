@@ -1,12 +1,12 @@
 import pygame
-from config import BULLET_SPEED
+from config import BULLET_SPEED, BULLET_WIDTH, BULLET_HEIGHT
 
 
 class Bullet:
     def __init__(self, x, y, color):
-        self.rect = pygame.Rect(x, y, 10, 10)
-        self.color = color  # Yellow color for the bullet
-        self.speed = BULLET_SPEED  # pixels per second
+        self.rect = pygame.Rect(x, y, BULLET_WIDTH, BULLET_HEIGHT)
+        self.color = color
+        self.speed = BULLET_SPEED
         self.radius = self.rect.width // 2
 
     def move(self, dt, dir):

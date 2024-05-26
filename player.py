@@ -36,10 +36,6 @@ class Player:
         if self.rect.bottom > SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
 
-    def update_position(self):
-        self.x = self.rect.x
-        self.y = self.rect.y
-
     def shoot(self):
         bullet = Bullet(self.rect.centerx, self.rect.top, PLAYER_BULLET_COLOR)
         self.bullets.append(bullet)
@@ -58,5 +54,4 @@ class Player:
 
     def update(self, dt, keys):
         self.move(dt, keys)
-        self.update_position()
         self.update_bullets(dt)
