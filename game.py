@@ -31,6 +31,9 @@ def run_game():
         player.update(dt, keys)
         enemy.update(dt)
 
+        # Check if enemy bullets hit the player
+        enemy.check_bullet_collisions(player)
+
         # RENDERING
         screen.fill((0, 0, 0))
         player.draw(screen)

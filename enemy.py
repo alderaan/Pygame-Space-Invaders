@@ -2,6 +2,7 @@ import pygame
 import time
 from config import SCREEN_WIDTH, SCREEN_HEIGHT, ENEMY_COLOR, ENEMY_WIDTH, ENEMY_HEIGHT
 from bullet import Bullet
+from collision import get_bounding_rect, check_collision
 
 
 # Enemy speed
@@ -18,6 +19,7 @@ class Enemy:
         self.direction = 1  # 1 means right, -1 means left
         self.bullets = []
         self.last_shot_time = time.time()  # Initialize last shot time
+        self.shape = "polygon"
 
     def move(self):
         self.x += self.direction * ENEMY_SPEED
@@ -41,6 +43,10 @@ class Enemy:
             bullet for bullet in self.bullets if not bullet.is_off_screen(SCREEN_HEIGHT)
         ]
 
+    # def update_position(self):
+    #    self.x = self.rect.x
+    #    self.y = self.rect.y
+
     def draw(self, screen):
         points = [
             (self.x, self.y),
@@ -51,7 +57,14 @@ class Enemy:
         for bullet in self.bullets:
             bullet.draw(screen)
 
+    def check_bullet_collisions(self, player):
+        for bullet in self.bullets:
+            if check_collision(bullet, player):
+                print("Player hit!")
+                # Handle player hit logic
+
     def update(self, dt):
         self.move()
+        # self.update_position()
         self.try_to_shoot()
         self.update_bullets(dt)
