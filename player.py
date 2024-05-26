@@ -2,7 +2,7 @@ import pygame
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
-    SPEED,
+    PLAYER_SPEED,
     PLAYER_COLOR,
     PLAYER_WIDTH,
     PLAYER_HEIGHT,
@@ -15,17 +15,12 @@ class Player:
         self.rect = pygame.Rect(x, y, PLAYER_WIDTH, PLAYER_HEIGHT)
         self.color = PLAYER_COLOR
         self.bullets = []
-        self.shape = "rect"
-        self.x = x
-        self.y = y
-        self.width = PLAYER_WIDTH
-        self.height = PLAYER_HEIGHT
 
     def move(self, dt, keys):
         if keys[pygame.K_LEFT]:
-            self.rect.move_ip(-SPEED * dt, 0)
+            self.rect.move_ip(-PLAYER_SPEED * dt, 0)
         elif keys[pygame.K_RIGHT]:
-            self.rect.move_ip(SPEED * dt, 0)
+            self.rect.move_ip(PLAYER_SPEED * dt, 0)
 
         self.check_bounds()
 
