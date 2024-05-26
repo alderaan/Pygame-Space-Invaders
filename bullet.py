@@ -16,4 +16,4 @@ class Bullet:
         pygame.draw.circle(screen, self.color, self.rect.center, self.radius)
 
     def is_off_screen(self, screen_height):
-        return self.rect.bottom < 0
+        return self.rect.bottom < 0 or self.rect.top > screen_height
