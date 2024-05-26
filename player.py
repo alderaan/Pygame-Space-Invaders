@@ -8,6 +8,7 @@ from config import (
     PLAYER_HEIGHT,
 )
 from bullet import Bullet
+from collision import check_collision
 
 
 class Player:
