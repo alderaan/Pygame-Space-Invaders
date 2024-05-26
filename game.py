@@ -14,9 +14,12 @@ def run_game():
     enemy = Enemy(SCREEN_WIDTH // 2, 50)
 
     run = True
+
+    # GAME LOOP
     while run:
         dt = clock.tick(60) / 1000  # Convert milliseconds to seconds
 
+        # EVENT HANDLING
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -24,14 +27,14 @@ def run_game():
                 player.shoot()
 
         keys = pygame.key.get_pressed()
-        player.move(dt, keys)
-        player.update_bullets(dt)
-        enemy.move()
 
+        player.update(dt, keys)
+        enemy.update(dt)
+
+        # RENDERING
         screen.fill((0, 0, 0))
         player.draw(screen)
         enemy.draw(screen)
-
         pygame.display.update()
 
     pygame.quit()

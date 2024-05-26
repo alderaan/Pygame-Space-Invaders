@@ -40,7 +40,7 @@ class Player:
 
     def update_bullets(self, dt):
         for bullet in self.bullets:
-            bullet.move(dt)
+            bullet.move(dt, -1)
         self.bullets = [
             bullet for bullet in self.bullets if not bullet.is_off_screen(SCREEN_HEIGHT)
         ]
@@ -49,3 +49,7 @@ class Player:
         pygame.draw.rect(screen, self.color, self.rect)
         for bullet in self.bullets:
             bullet.draw(screen)
+
+    def update(self, dt, keys):
+        self.move(dt, keys)
+        self.update_bullets(dt)
