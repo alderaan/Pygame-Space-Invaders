@@ -12,7 +12,11 @@ def run_game():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT)
-    enemies = [Enemy(100, 100), Enemy(200, 100), Enemy(300, 100)]
+    enemies = [
+        Enemy(100, 0),
+        Enemy(300, 0),
+        Enemy(500, 0),
+    ]
 
     run = True
 
@@ -38,8 +42,9 @@ def run_game():
             # enemy.check_bullet_collisions(player)
 
         # Check if player's bullets hit enemies
-        for bullet in player.bullets[:]:  # Iterate over a copy of the list
-            for enemy in enemies[:]:  # Iterate over a copy of the list
+        # Create shallow copies of lists
+        for bullet in player.bullets[:]:
+            for enemy in enemies[:]:
                 if check_collision(bullet, enemy):
                     if enemy.take_damage(25):
                         enemies.remove(enemy)
@@ -47,11 +52,10 @@ def run_game():
                     break
 
         # Check if enemy bullets hit the player
-        for enemy in enemies:
-            for bullet in enemy.bullets:
+        for enemy in enemies[:]:
+            for bullet in enemy.bullets[:]:
                 if check_collision(bullet, player):
                     print("Player hit!")
-                    # Handle player hit logic
                     enemy.bullets.remove(bullet)
                     # Optionally, reduce player's health or handle game over
 

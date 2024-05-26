@@ -1,6 +1,13 @@
 import pygame
 import time
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, ENEMY_COLOR, ENEMY_WIDTH, ENEMY_HEIGHT
+from config import (
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    ENEMY_COLOR,
+    ENEMY_WIDTH,
+    ENEMY_HEIGHT,
+    ENEMY_BULLET_COLOR,
+)
 from bullet import Bullet
 from collision import check_collision
 
@@ -24,6 +31,7 @@ class Enemy:
         self.rect.x += self.direction * ENEMY_SPEED
         if self.rect.right >= SCREEN_WIDTH or self.rect.left <= 0:
             self.direction *= -1  # Reverse direction
+            self.rect.y += 50
 
     def try_to_shoot(self):
         current_time = time.time()
@@ -32,7 +40,7 @@ class Enemy:
             self.last_shot_time = current_time  # Update last shot time
 
     def shoot(self):
-        bullet = Bullet(self.rect.centerx, self.rect.bottom)
+        bullet = Bullet(self.rect.centerx, self.rect.bottom, ENEMY_BULLET_COLOR)
         self.bullets.append(bullet)
 
     def update_bullets(self, dt):

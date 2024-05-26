@@ -6,6 +6,7 @@ from config import (
     PLAYER_COLOR,
     PLAYER_WIDTH,
     PLAYER_HEIGHT,
+    PLAYER_BULLET_COLOR,
 )
 from bullet import Bullet
 from collision import check_collision
@@ -40,7 +41,7 @@ class Player:
         self.y = self.rect.y
 
     def shoot(self):
-        bullet = Bullet(self.rect.centerx, self.rect.top)
+        bullet = Bullet(self.rect.centerx, self.rect.top, PLAYER_BULLET_COLOR)
         self.bullets.append(bullet)
 
     def update_bullets(self, dt):
