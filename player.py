@@ -59,7 +59,7 @@ class Player:
         self.health -= damage
         if self.health <= 0:
             print("Player died")
-            return True  # Enemy is dead
+            return True  # Player is dead
         # Start flashing
         self.is_flashing = True
         self.flash_start_time = time.time()

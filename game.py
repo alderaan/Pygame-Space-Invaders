@@ -1,6 +1,6 @@
 import pygame
 from player import Player
-from config import SCREEN_WIDTH, SCREEN_HEIGHT
+from config import SCREEN_WIDTH, SCREEN_HEIGHT, ENEMY_SPAWN_INTERVAL
 from enemy import Enemy
 from collision import check_collision
 
@@ -18,11 +18,15 @@ def run_game():
         Enemy(500, 0),
     ]
 
+    spawn_timer = 0
+    spawn_interval = ENEMY_SPAWN_INTERVAL
+
     run = True
 
     # GAME LOOP
     while run:
         dt = clock.tick(60) / 1000  # Convert milliseconds to seconds
+        spawn_timer += dt
 
         # EVENT HANDLING
         for event in pygame.event.get():
@@ -57,6 +61,17 @@ def run_game():
                         print("Player hit!")
                     enemy.bullets.remove(bullet)
                     # Optionally, reduce player's health or handle game over
+
+        # Spawn a new enemy every x seconds
+        if spawn_timer >= spawn_interval:
+            enemies.extend(
+                [
+                    Enemy(100, 0),
+                    Enemy(300, 0),
+                    Enemy(500, 0),
+                ]
+            )
+            spawn_timer = 0  # Reset the spawn timer
 
         # RENDERING
         screen.fill((0, 0, 0))
