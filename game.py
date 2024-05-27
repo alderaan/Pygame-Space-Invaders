@@ -53,7 +53,8 @@ def run_game():
         for enemy in enemies[:]:
             for bullet in enemy.bullets[:]:
                 if check_collision(bullet, player):
-                    print("Player hit!")
+                    if player.take_damage(25):
+                        print("Player hit!")
                     enemy.bullets.remove(bullet)
                     # Optionally, reduce player's health or handle game over
 

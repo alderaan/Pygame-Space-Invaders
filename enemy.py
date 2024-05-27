@@ -10,7 +10,9 @@ from config import (
     ENEMY_RELOAD_TIME,
 )
 from bullet import Bullet
-from collision import check_collision
+
+# from collision import check_collision
+from flashing_effect import get_flash_color
 
 # Enemy speed
 ENEMY_SPEED = 5
@@ -28,7 +30,7 @@ class Enemy:
         self.health = health
         self.is_flashing = False
         self.flash_start_time = 0
-        self.flash_duration = 0.4  # flash duration in seconds
+        self.flash_duration = 0.4
 
     def move(self):
         self.rect.x += self.direction * ENEMY_SPEED
@@ -54,20 +56,13 @@ class Enemy:
         ]
 
     def draw(self, screen):
-        if self.is_flashing:
-            # Calculate elapsed time since flash started
-            elapsed_time = time.time() - self.flash_start_time
-            # Determine if we should be showing the original color or white
-            if int(elapsed_time * 10) % 2 == 0:
-                color = ENEMY_COLOR
-            else:
-                color = (255, 255, 255)
-            # End flashing after the flash duration
-            if elapsed_time > self.flash_duration:
-                self.is_flashing = False
-        else:
-            color = ENEMY_COLOR
-
+        color, self.is_flashing = get_flash_color(
+            self.is_flashing,
+            self.flash_start_time,
+            ENEMY_COLOR,
+            (255, 255, 255),
+            self.flash_duration,
+        )
         points = [
             (self.rect.left, self.rect.top),
             (self.rect.centerx, self.rect.bottom),
