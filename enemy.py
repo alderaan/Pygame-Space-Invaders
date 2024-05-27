@@ -12,7 +12,6 @@ from config import (
 from bullet import Bullet
 from collision import check_collision
 
-
 # Enemy speed
 ENEMY_SPEED = 5
 
@@ -27,6 +26,9 @@ class Enemy:
         self.bullets = []
         self.last_shot_time = time.time()  # Initialize last shot time
         self.health = health
+        self.is_flashing = False
+        self.flash_start_time = 0
+        self.flash_duration = 0.4  # flash duration in seconds
 
     def move(self):
         self.rect.x += self.direction * ENEMY_SPEED
@@ -52,12 +54,26 @@ class Enemy:
         ]
 
     def draw(self, screen):
+        if self.is_flashing:
+            # Calculate elapsed time since flash started
+            elapsed_time = time.time() - self.flash_start_time
+            # Determine if we should be showing the original color or white
+            if int(elapsed_time * 10) % 2 == 0:
+                color = ENEMY_COLOR
+            else:
+                color = (255, 255, 255)
+            # End flashing after the flash duration
+            if elapsed_time > self.flash_duration:
+                self.is_flashing = False
+        else:
+            color = ENEMY_COLOR
+
         points = [
             (self.rect.left, self.rect.top),
             (self.rect.centerx, self.rect.bottom),
             (self.rect.right, self.rect.top),
         ]
-        pygame.draw.polygon(screen, ENEMY_COLOR, points)
+        pygame.draw.polygon(screen, color, points)
         for bullet in self.bullets:
             bullet.draw(screen)
 
@@ -67,6 +83,9 @@ class Enemy:
         if self.health <= 0:
             print("Enemy died")
             return True  # Enemy is dead
+        # Start flashing
+        self.is_flashing = True
+        self.flash_start_time = time.time()
         return False
 
     def update(self, dt):
