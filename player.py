@@ -47,11 +47,6 @@ class Player:
             bullet for bullet in self.bullets if not bullet.is_off_screen(SCREEN_HEIGHT)
         ]
 
-    # def draw(self, screen):
-    #    pygame.draw.rect(screen, self.color, self.rect)
-    #    for bullet in self.bullets:
-    #        bullet.draw(screen)
-
     def draw(self, screen):
         points = [
             (self.rect.left, self.rect.bottom),  # Bottom-left corner
