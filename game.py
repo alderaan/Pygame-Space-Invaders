@@ -17,11 +17,7 @@ def run_game():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT)
-    enemies = [
-        Enemy(100, 0),
-        Enemy(300, 0),
-        Enemy(500, 0),
-    ]
+    enemies = []
 
     spawn_timer = 0
     spawn_interval = ENEMY_SPAWN_INTERVAL
@@ -71,9 +67,7 @@ def run_game():
         if spawn_timer >= spawn_interval:
             enemies.extend(
                 [
-                    Enemy(100, 0),
-                    Enemy(300, 0),
-                    Enemy(500, 0),
+                    Enemy(0, 0),
                 ]
             )
             spawn_timer = 0  # Reset the spawn timer
