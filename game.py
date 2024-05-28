@@ -1,6 +1,11 @@
 import pygame
 from player import Player
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, ENEMY_SPAWN_INTERVAL
+from config import (
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    ENEMY_SPAWN_INTERVAL,
+    PLAYER_BULLET_DAMAGE,
+)
 from enemy import Enemy
 from collision import check_collision
 
@@ -48,7 +53,7 @@ def run_game():
         for bullet in player.bullets[:]:
             for enemy in enemies[:]:
                 if check_collision(bullet, enemy):
-                    if enemy.take_damage(25):
+                    if enemy.take_damage(PLAYER_BULLET_DAMAGE):
                         enemies.remove(enemy)
                     player.bullets.remove(bullet)
                     break
