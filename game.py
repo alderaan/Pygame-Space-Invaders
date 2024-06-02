@@ -14,20 +14,21 @@ from collision import check_collision
 
 
 def game_over_screen(screen):
-    font = pygame.font.Font(None, 74)  # Change the size as needed
+    font = pygame.font.Font(None, 74)
     screen.fill(BLACK)
     text = font.render("Game Over", True, WHITE)
     text_rect = text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
     screen.blit(text, text_rect)
     pygame.display.flip()
-    time.sleep(2)  # Pause for 2 seconds
+    time.sleep(2)
 
 
 def initialize_game():
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT)
     enemies = []
     spawn_timer = 0
-    return player, enemies, spawn_timer
+    score = 0
+    return player, enemies, spawn_timer, score
 
 
 def run_game():
@@ -40,10 +41,9 @@ def run_game():
     running = True
 
     while running:
-        player, enemies, spawn_timer = initialize_game()
+        player, enemies, spawn_timer, score = initialize_game()
         game_over = False
 
-        # GAME LOOP
         while not game_over:
             dt = clock.tick(60) / 1000  # Convert milliseconds to seconds
             spawn_timer += dt
@@ -71,6 +71,7 @@ def run_game():
                     if check_collision(bullet, enemy):
                         if enemy.take_damage(PLAYER_BULLET_DAMAGE):
                             enemies.remove(enemy)
+                            score += 1  # Increment score when an enemy is killed
                         player.bullets.remove(bullet)
                         break
 
@@ -93,6 +94,12 @@ def run_game():
             player.draw(screen)
             for enemy in enemies:
                 enemy.draw(screen)
+
+            # Display the score
+            font = pygame.font.Font(None, 36)
+            score_text = font.render(f"Score: {score}", True, WHITE)
+            screen.blit(score_text, (10, 10))  # Top-left corner
+
             pygame.display.update()
 
     pygame.quit()
