@@ -5,6 +5,8 @@ from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     ENEMY_SPAWN_INTERVAL,
+    ENEMY_SPEED,
+    ENEMY_RELOAD_TIME,
     PLAYER_BULLET_DAMAGE,
     BLACK,
     WHITE,
@@ -43,6 +45,8 @@ def run_game():
     while running:
         player, enemies, spawn_timer, score = initialize_game()
         game_over = False
+        enemy_speed_mod = 1.0
+        enemy_reload_mod = 1.0
 
         while not game_over:
             dt = clock.tick(60) / 1000  # Convert milliseconds to seconds
@@ -86,7 +90,18 @@ def run_game():
 
             # Spawn a new enemy every x seconds
             if spawn_timer >= ENEMY_SPAWN_INTERVAL:
-                enemies.append(Enemy(0, 0))
+                enemy_speed_mod += 0.1
+                enemy_reload_mod -= 0.05
+                print(ENEMY_SPEED * enemy_speed_mod)
+                enemies.append(
+                    Enemy(
+                        0,
+                        0,
+                        health=100,
+                        speed=ENEMY_SPEED * enemy_speed_mod,
+                        reload_time=ENEMY_RELOAD_TIME * enemy_reload_mod,
+                    )
+                )
                 spawn_timer = 0  # Reset the spawn timer
 
             # RENDERING

@@ -10,17 +10,12 @@ from config import (
     ENEMY_RELOAD_TIME,
 )
 from bullet import Bullet
-
-# from collision import check_collision
 from flashing_effect import get_flash_color
-
-# Enemy speed
-ENEMY_SPEED = 5
 
 
 # Enemy class
 class Enemy:
-    def __init__(self, x, y, health=100):
+    def __init__(self, x, y, health=100, speed=5, reload_time=1):
         self.rect = pygame.Rect(x, y, ENEMY_WIDTH, ENEMY_HEIGHT)
         self.width = ENEMY_WIDTH
         self.height = ENEMY_HEIGHT
@@ -28,19 +23,21 @@ class Enemy:
         self.bullets = []
         self.last_shot_time = time.time()  # Initialize last shot time
         self.health = health
+        self.speed = speed
+        self.reload_time = reload_time
         self.is_flashing = False
         self.flash_start_time = 0
         self.flash_duration = 0.4
 
     def move(self):
-        self.rect.x += self.direction * ENEMY_SPEED
+        self.rect.x += self.direction * self.speed
         if self.rect.right >= SCREEN_WIDTH or self.rect.left <= 0:
             self.direction *= -1  # Reverse direction
             self.rect.y += 50
 
     def try_to_shoot(self):
         current_time = time.time()
-        if current_time - self.last_shot_time >= ENEMY_RELOAD_TIME:
+        if current_time - self.last_shot_time >= self.reload_time:
             self.shoot()
             self.last_shot_time = current_time  # Update last shot time
 
