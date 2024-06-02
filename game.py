@@ -35,7 +35,7 @@ def initialize_game():
 
 def run_game():
     pygame.init()
-    pygame.display.set_caption("David's First Pygame")
+    pygame.display.set_caption("David's Space Invaders Clone")
 
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -92,6 +92,8 @@ def run_game():
             if spawn_timer >= ENEMY_SPAWN_INTERVAL:
                 enemy_speed_mod += 0.1
                 enemy_reload_mod -= 0.05
+                if enemy_reload_mod <= 0.3:
+                    enemy_reload_mod = 0.3
                 print(ENEMY_SPEED * enemy_speed_mod)
                 enemies.append(
                     Enemy(
