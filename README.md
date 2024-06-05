@@ -1,6 +1,6 @@
 # David's Space Invaders
 
-![Project Demo](./pygame_1.gif)
+![Project Demo](./space_invaders.gif)
 
 ## Overview
 

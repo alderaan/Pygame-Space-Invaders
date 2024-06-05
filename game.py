@@ -35,7 +35,7 @@ def initialize_game():
 
 def run_game():
     pygame.init()
-    pygame.display.set_caption("David's Space Invaders Clone")
+    pygame.display.set_caption("David's Space Invaders")
 
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
